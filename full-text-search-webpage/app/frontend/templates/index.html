@@ -1,0 +1,54 @@
+{% extends "base.html"%}
+
+{% block title%}Home Jinja{% endblock%}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/results.css') }}">
+{%endblock%}
+
+{%block scripts%}
+<script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
+{%endblock%}
+{% block content %}
+ <div class="col-sm-3 search-container">
+    <div class="row content">
+      <div class="side-nav">
+        <div class="container-searchbar">
+          <input type="search" class="form-control" placeholder="Search">
+        </div>
+        <div class="container-filter">
+          <h2>Filter</h2>
+          <ul filter-list>
+            <li class="filter-item">
+              <p>test</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-9 container-fluid result-container">
+      <ul class="result-list">
+        <li class="result-item">
+          <div class="card result-content">
+            <div class="card-img-top" style="text-align: center;">
+              <p>Title</p>
+            </div>
+            <div class="card-body">
+              <p class="card-text">Content of result.</p>
+            </div>
+          </div>
+        </li>
+        <li class="result-item">
+          <div class="card result-content">
+            <div class="card-img-top" style="text-align: center;">
+              <p>Title</p>
+            </div>
+            <div class="card-body">
+              <p class="card-text">Content of result.</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+  </div>
+{% endblock%}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/body.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/navbar.css') }}">
+    {# <link rel="stylesheet" href="./static/styles/body.css"> #}
+    {# <link rel="stylesheet" href="./app/frontend/static/styles/navbar.css"> #}
+    {%block styles%}{% endblock%}
+    {# <link rel="stylesheet" href="./src/styles/results.css"> #}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    {% block scripts %}{% endblock%}
+  
+
+   
+</head>
+<body>
+  <div class="container-fluid" id="navigation-bar">
+   <a class="navbar-brand">Simple Project</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+  {% block content %}{%endblock%}
+
+</body>
+</html>
