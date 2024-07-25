@@ -7,16 +7,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/body.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/navbar.css') }}">
-    {# <link rel="stylesheet" href="./static/styles/body.css"> #}
-    {# <link rel="stylesheet" href="./app/frontend/static/styles/navbar.css"> #}
     {%block styles%}{% endblock%}
-    {# <link rel="stylesheet" href="./src/styles/results.css"> #}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     {% block scripts %}{% endblock%}
-  
-
-   
 </head>
 <body>
   <div class="container-fluid" id="navigation-bar">

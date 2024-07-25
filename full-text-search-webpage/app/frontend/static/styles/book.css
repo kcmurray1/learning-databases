@@ -2,16 +2,16 @@
     padding-top: 3%;
 }
 
-.result-container {
+.book-container {
     background-color: inherit;
 }
 
-.result-list {
+.book-list {
     background-color: gray;    
     
 }
 
-.result-item {
+.book {
     background-color: #ffffff; /* White background for each item */
     margin-bottom: 10px; /* Space between items */
     padding: 15px; /* Padding inside each item */
@@ -20,6 +20,6 @@
     color: black;
 }
 
-.result-item:hover {
+.book:hover {
     background-color: rgb(218, 218, 226);
 }
