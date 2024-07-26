@@ -16,3 +16,14 @@
 li {
     list-style-type: none;
 }
+
+.contact-dropdown {
+    position: relative;
+}
+
+.contact-dropdown-content {
+    background-color: rgb(127, 190, 245);
+    position: absolute;
+    border-top: 5px;
+    z-index: 1;
+}

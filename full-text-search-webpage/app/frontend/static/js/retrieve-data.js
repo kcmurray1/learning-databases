@@ -10,8 +10,8 @@ function getBookData()
             let idk = document.getElementById("results");
             for(let entry of packet["data"])
             {
-                let [first_name, last_name, price, title, month, year, description] = entry;
-                idk.append(new Book(`${first_name} ${last_name}`, title, description).element);
+                let [authors, price, title, month, year, description] = entry;
+                idk.append(new Book(authors, title, description).element);
             
             }
            }

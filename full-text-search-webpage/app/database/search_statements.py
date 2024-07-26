@@ -6,6 +6,9 @@ class SqlStatements():
 
     RETRIEVE_AUTHOR = "SELECT author_id FROM Authors WHERE first_name = ? AND last_name = ?"
     
-    RETRIEVE_BOOK_WITH_LIMIT = "SELECT a.first_name, a.last_name, b.price, b.title, b.month, b.year, b.description FROM Books b JOIN BookAuthors ba ON b.book_id = ba.book_id JOIN Authors a ON ba.author_id = a.author_id LIMIT ? OFFSET ?"
-    BOOK_AUTHOR = "SELECT * FROM BookAuthors"
-    idk = "SELECT a.first_name, a.last_name, b.price, b.title, b.month, b.year, b.description FROM Books b JOIN BookAuthors ba ON b.book_id = ba.book_id JOIN Authors a ON ba.author_id = a.author_id LIMIT ? OFFSET ?"
+    RETRIEVE_BOOK_WITH_LIMIT = """SELECT GROUP_CONCAT(a.first_name || ' ' || a.last_name, ', ') AS authors, b.price, b.title, b.month, b.year, b.description 
+    FROM Books b 
+    JOIN BookAuthors ba ON b.book_id = ba.book_id
+    JOIN Authors a ON ba.author_id = a.author_id
+    GROUP BY b.book_id
+    LIMIT ? OFFSET ?"""

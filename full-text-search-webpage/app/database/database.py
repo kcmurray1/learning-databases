@@ -54,7 +54,6 @@ class BookDatabase:
 
     def get_books(self):
         # Return 10 books from database
-        res = self.cursor.execute(SqlStatements.BOOK_AUTHOR)
         res = self.cursor.execute(SqlStatements.RETRIEVE_BOOK_WITH_LIMIT, (self.book_offset_size, self.book_offset))
         res = res.fetchall()
 
