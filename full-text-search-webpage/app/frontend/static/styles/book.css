@@ -12,7 +12,7 @@
 }
 
 .book {
-    background-color: #ffffff; /* White background for each item */
+    background-color: #ffffff;
     margin-bottom: 10px; /* Space between items */
     padding: 15px; /* Padding inside each item */
     border: 1px solid #3d3d3d; /* Light border around each item */

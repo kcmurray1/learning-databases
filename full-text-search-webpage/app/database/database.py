@@ -1,11 +1,13 @@
 """A generic database used to store Youtube video information"""
-from .search_statements import SqlStatements
 import sqlite3
+from .search_statements import SqlStatements
 
 class BookDatabase:
 
     def __init__(self, database_path):
         self.database_path = database_path
+        self.book_offset = 0
+        self.book_offset_size = 10
       
 
     def __enter__(self):
@@ -52,15 +54,11 @@ class BookDatabase:
         # Return AuthorID
         return res[0]
 
-    def find(self, channel_id, phrase):
-        """Find channels that have videos containing the phrase
-        Args: 
-            channel_id: int representing a channel
-            phrase: a str for the phrase to find in the database
-        Returns: a list of tuple(video title, url) pertinent to the phrase otherwise returns
-            None
-        """
-        res = self.cursor.execute(SqlStatements.RETRIEVE_CHANNEL_PHRASE, (channel_id, phrase))
+    def get_books(self):
+        # Return 10 books from database
+        res = self.cursor.execute(SqlStatements.RETRIEVE_BOOK_WITH_LIMIT, (self.book_offset_size, self.book_offset))
+        res = res.fetchall()
 
-        return res.fetchall()
+        return res
+
         

@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+from app.database.database import BookDatabase
 
 views = Blueprint('views', __name__,  template_folder="../app/frontend/templates")
 
@@ -16,4 +17,7 @@ def contact():
 
 @views.route('/database')
 def data():
-    return {"data": 100}
+    book_data = {"data": "undefined"}
+    with BookDatabase("app/database/relational-books.db") as db:
+        book_data["data"] = db.get_books()
+    return book_data
