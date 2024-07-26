@@ -3,6 +3,7 @@
 {% block title%}Home{% endblock%}
 {% block styles %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/book.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/searchbar.css') }}">
 {%endblock%}
 
 {%block scripts%}
@@ -12,21 +13,25 @@
 {%endblock%}
 {% block content %}
  <div class="col-sm-3 search-container">
-    <div class="row content">
-      <div class="side-nav">
-        <div class="container-searchbar">
-          <input type="search" class="form-control" placeholder="Search">
-        </div>
-        <div class="container-filter">
-          <h2>Filter</h2>
-          <ul filter-list>
-            <li class="filter-item">
-              <p>test</p>
-            </li>
-          </ul>
-        </div>
+  <form action="/database/filter" method="get">
+      <div class="container-searchbar">
+        <h1>Book Lookup</h1>
+        <input type="search" class="form-control" id="search-bar" name="query" placeholder="Search">
       </div>
-    </div>
+      <div class="container-filter">
+        <h2>Filters</h2>
+        <ul filter-list>
+          <li class="filter-item">
+            <input type="checkbox" id="f1" name="idk-man" value="Filter1">
+            <label for="f1">FilterOne</label><br>
+          </li>
+          <li class="filter-item">
+            <input type="checkbox" id="f1" name="who" value="Filter2">
+            <label for="f1">FilterTwo</label>
+          </li>
+        </ul>
+      </div>
+    </form>
   </div>
 
   <div class="col-sm-9 container-fluid book-container">

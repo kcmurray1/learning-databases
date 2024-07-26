@@ -1,0 +1,12 @@
+.search-container {
+    float: left;
+}
+
+.search-button {
+    float: right;
+}
+
+.search-container h1 {
+    color: black;
+    text-align: center;
+}
