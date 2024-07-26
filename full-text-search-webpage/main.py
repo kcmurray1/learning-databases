@@ -1,6 +1,7 @@
+from app import create_app
 import pandas as pd
 from app.database.database import BookDatabase
-from app import create_app
+
 def clean_authors(authors):
     authors_cleaned = list()
     authors = authors.split(',')  
@@ -16,24 +17,25 @@ def clean_authors(authors):
 def populate_database(file):
     book_frame = pd.read_csv(file)
     for title, authors, description, category, publisher, price, month, year in book_frame.values:
-        for author in clean_authors(authors):   
-            with BookDatabase("database/relational-books.db") as db:
+        with BookDatabase("./app/database/books_final.db") as db:
+            # Insert into Books table
+            book_id = db.insert_book((price, title, month, year, description))
+            print(book_id)
+            for author in clean_authors(authors):   
                 # Insert into Authors table
                 author_id = db.insert_author(author)
-                # Insert into Books table
-                db.insert_book((author_id, price, title, category, month, year, description))
 
-   
-    
-    
-
+                # Insert into BookAuthors table
+                db.insert_book_author(author_id, book_id)
 
 def main():
-    app = create_app()
-    app.run(debug=True)
-    # csv_file = "./database/BooksDatasetSmall.csv"
+
+    # csv_file = "./app/database/BooksDatasetSmall.csv"
 
     # populate_database(csv_file)
+    app = create_app()
+    app.run(debug=True)
+   
 
 
 if __name__ == "__main__":

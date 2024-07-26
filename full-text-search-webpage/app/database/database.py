@@ -25,18 +25,16 @@ class BookDatabase:
     def insert_book(self, values):
         try:
             self.cursor.execute(SqlStatements.INSERT_BOOK, values)
+            return self.cursor.lastrowid
         except sqlite3.IntegrityError:
             pass
     
-    # def insert_book(self, columns, values):
-    #     try:
-    #         (AuthorID, Price, Title, Category, Month, Year, Description) = values
-            
-    #         self.cursor.execute(SqlStatements.INSERT_QUERY.format(Table="Books", Columns=columns, Values=values))
-    #     except (sqlite3.IntegrityError):
-    #         print("ERROR")
-    #         pass    
-
+    def insert_book_author(self, author_id, book_id):
+        try:
+            self.cursor.execute(SqlStatements.INSERT_BOOK_AUTHOR, (author_id, book_id))
+        except sqlite3.IntegrityError:
+            pass
+    
     def insert_author(self, author: tuple):
         """Adds author to database
         Args:
@@ -56,6 +54,7 @@ class BookDatabase:
 
     def get_books(self):
         # Return 10 books from database
+        res = self.cursor.execute(SqlStatements.BOOK_AUTHOR)
         res = self.cursor.execute(SqlStatements.RETRIEVE_BOOK_WITH_LIMIT, (self.book_offset_size, self.book_offset))
         res = res.fetchall()
 

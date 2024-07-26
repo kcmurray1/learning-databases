@@ -18,6 +18,6 @@ def contact():
 @views.route('/database')
 def data():
     book_data = {"data": "undefined"}
-    with BookDatabase("app/database/relational-books.db") as db:
+    with BookDatabase("app/database/books_final.db") as db:
         book_data["data"] = db.get_books()
     return book_data
