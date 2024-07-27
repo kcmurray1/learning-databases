@@ -16,17 +16,22 @@ def clean_authors(authors):
 
 def populate_database(file):
     book_frame = pd.read_csv(file)
-    for title, authors, description, category, publisher, price, month, year in book_frame.values:
+    for title, authors, description, categories, publisher, price, month, year in book_frame.values:
         with BookDatabase("./app/database/books_final.db") as db:
             # Insert into Books table
             book_id = db.insert_book((price, title, month, year, description))
-            print(book_id)
             for author in clean_authors(authors):   
                 # Insert into Authors table
                 author_id = db.insert_author(author)
 
                 # Insert into BookAuthors table
                 db.insert_book_author(author_id, book_id)
+            if pd.isna(categories):
+                categories = "uncategorized"
+            # Process cateogries
+            for category in categories.split(','):
+                category_id = db.insert_category(category.strip().lower())
+                db.insert_book_category(book_id, category_id)
 
 def main():
 

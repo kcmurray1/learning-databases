@@ -19,3 +19,12 @@ class SqlStatements():
     JOIN Authors a ON ba.author_id = a.author_id
     WHERE {Filter}
     GROUP BY b.book_id"""
+
+
+    INSERT_CATEGORY = "INSERT INTO Categories (name) VALUES (?)"
+
+    INSERT_BOOK_CATEGORIES = "INSERT INTO BookCategories (book_id, category_id) VALUES (?, ?)"
+
+    RETRIEVE_CATEGORY = "SELECT name FROM Categories WHERE name = ?"
+
+    RETRIEVE_CATEGORIES_ALL = "SELECT * FROM Categories"

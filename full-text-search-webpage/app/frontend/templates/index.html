@@ -9,18 +9,19 @@
 {%block scripts%}
 <script type="text/javascript" src="{{ url_for('static', filename='js/retrieve-data.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/book.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/category.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
 {%endblock%}
 {% block content %}
  <div class="col-sm-3 search-container">
-  <form action="/database/filter" method="get">
+  <form id="search-form" action="/database/filter" method="get">
       <div class="container-searchbar">
         <h1>Book Lookup</h1>
         <input type="search" class="form-control" id="search-bar" name="query" placeholder="Search">
       </div>
       <div class="container-filter">
         <h2>Filters</h2>
-        <ul filter-list>
+        <ul class="filter-list">
           <li class="filter-item">
             <input type="checkbox" id="f1" name="idk-man" value="Filter1">
             <label for="f1">FilterOne</label><br>

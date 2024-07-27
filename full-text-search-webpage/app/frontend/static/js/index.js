@@ -2,4 +2,5 @@
 document.addEventListener("DOMContentLoaded", function()
 {
     getBookData();
+    getFilterData();
 });

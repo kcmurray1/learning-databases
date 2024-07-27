@@ -21,6 +21,9 @@ class BookDatabase:
         """Used at the end of 'with' block and handle exceptions that occur"""
         self.connection.commit()
         self.connection.close()
+
+    def reset(self):
+        self.book_offset = 0
         
     def insert_book(self, values):
         try:
@@ -52,11 +55,34 @@ class BookDatabase:
         # Return AuthorID
         return res[0]
 
+    def insert_category(self, category):
+        print(category)
+         # Check if category already exists
+        res = self.cursor.execute(SqlStatements.RETRIEVE_CATEGORY, (category,))
+        res = res.fetchone()
+        if res:
+            return res[0]
+        # Add new category to database
+        self.cursor.execute(SqlStatements.INSERT_CATEGORY, (category,))
+        return self.cursor.lastrowid
+
+    def insert_book_category(self, book_id, category_id):
+        try:
+            print(book_id, category_id)
+            self.cursor.execute(SqlStatements.INSERT_BOOK_CATEGORIES, (book_id, category_id))
+        except sqlite3.IntegrityError:
+            pass
+
     def get_books(self):
         # Return 10 books from database
         res = self.cursor.execute(SqlStatements.RETRIEVE_BOOK_WITH_LIMIT, (self.book_offset_size, self.book_offset))
         res = res.fetchall()
-
+        self.book_offset += self.book_offset_size
         return res
 
+    def get_categories(self):
+        res = self.cursor.execute(SqlStatements.RETRIEVE_CATEGORIES_ALL)
+        res = res.fetchall()
+
+        return res
         
