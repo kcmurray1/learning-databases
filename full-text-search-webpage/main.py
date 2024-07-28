@@ -40,14 +40,7 @@ def debug_database(file):
 
 def main():
 
-    csv_file = "./app/database/BooksDatasetSmall.csv"
-    # sf = debug_database(csv_file)
-
-    # authors = list()
-    # for row in sf.values:
-    #     authors.append(row[1])
-
-    #     print(f"Title {row[0]}, Authors {row[1]}, Categories {row[3]}")
+    # csv_file = "./app/database/BooksDatasetSmall.csv"
 
     # populate_database(csv_file)
     app = create_app()
