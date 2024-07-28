@@ -10,3 +10,13 @@
     color: black;
     text-align: center;
 }
+
+.book-container{
+    min-height: 90vh;
+    padding-bottom: 5vh;
+
+}
+
+/* .book-list {
+    min-height: 100vh;
+} */

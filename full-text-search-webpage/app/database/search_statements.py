@@ -28,3 +28,14 @@ class SqlStatements():
     RETRIEVE_CATEGORY = "SELECT name FROM Categories WHERE name = ?"
 
     RETRIEVE_CATEGORIES_ALL = "SELECT * FROM Categories"
+
+    TEMPLATE_FILTER_CATEGORY = "OR c.category_id = ? "
+    TEMPLATE_FILTER_CATEGORY_START = "c.category_id = ? " 
+    TEMPLATE_FILTER_SEARCH = """SELECT GROUP_CONCAT(a.first_name || ' ' || a.last_name, ', ') AS authors, b.price, b.title, b.month, b.year, b.description 
+FROM Books b 
+JOIN BookAuthors ba ON b.book_id = ba.book_id
+JOIN Authors a ON ba.author_id = a.author_id
+JOIN BookCategories bc ON bc.book_id = b.book_id
+JOIN Categories c ON c.category_id = bc.category_id
+WHERE {Filter}
+GROUP BY b.book_id"""

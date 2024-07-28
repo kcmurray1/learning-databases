@@ -31,11 +31,23 @@ def populate_database(file):
             # Process cateogries
             for category in categories.split(','):
                 category_id = db.insert_category(category.strip().lower())
+                # Insert into BookCategories table
                 db.insert_book_category(book_id, category_id)
+def debug_database(file):
+    book_frame = pd.read_csv(file)
+
+    return book_frame
 
 def main():
 
-    # csv_file = "./app/database/BooksDatasetSmall.csv"
+    csv_file = "./app/database/BooksDatasetSmall.csv"
+    # sf = debug_database(csv_file)
+
+    # authors = list()
+    # for row in sf.values:
+    #     authors.append(row[1])
+
+    #     print(f"Title {row[0]}, Authors {row[1]}, Categories {row[3]}")
 
     # populate_database(csv_file)
     app = create_app()

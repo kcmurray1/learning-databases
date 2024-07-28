@@ -8,6 +8,7 @@ class BookDatabase:
         self.database_path = database_path
         self.book_offset = 0
         self.book_offset_size = 10
+        self.query = None
       
 
     def __enter__(self):
@@ -24,6 +25,7 @@ class BookDatabase:
 
     def reset(self):
         self.book_offset = 0
+        self.query = None
         
     def insert_book(self, values):
         try:
@@ -75,9 +77,14 @@ class BookDatabase:
 
     def get_books(self):
         # Return 10 books from database
-        res = self.cursor.execute(SqlStatements.RETRIEVE_BOOK_WITH_LIMIT, (self.book_offset_size, self.book_offset))
+        res = []
+        if self.query:
+            res = self.cursor.execute(self.query[0], self.query[1])
+        else:
+            res = self.cursor.execute(SqlStatements.RETRIEVE_BOOK_WITH_LIMIT, (self.book_offset_size, self.book_offset))
+            self.book_offset += self.book_offset_size
         res = res.fetchall()
-        self.book_offset += self.book_offset_size
+        
         return res
 
     def get_categories(self):
@@ -85,4 +92,15 @@ class BookDatabase:
         res = res.fetchall()
 
         return res
+    
+    def execute_query(self, search_term, categories):
+        if not search_term:
+            categories = categories[1:]
         
+        query = SqlStatements.TEMPLATE_FILTER_SEARCH
+        filters = SqlStatements.TEMPLATE_FILTER_CATEGORY_START + SqlStatements.TEMPLATE_FILTER_CATEGORY * (len(categories) - 1)
+        query = query.format(Filter=filters)
+        print(query)
+        self.query = (query, categories)
+        # res = self.cursor.execute(query, categories)
+        # print(res.fetchall())        

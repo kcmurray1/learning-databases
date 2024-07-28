@@ -37,6 +37,6 @@ def filters():
 @views.route('/database/filter')
 def filtered():
     search_term = request.args.get("query")
-    for value in request.args.values():
-        print(value)
+    with db_lock, database as db:
+        db.execute_query(search_term, tuple(request.args.values()))
     return redirect("/")
