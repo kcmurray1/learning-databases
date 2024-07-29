@@ -7,7 +7,6 @@ def clean_authors(authors):
     authors = authors.split(',')  
     print("BEFORE:", authors)
     for i in range(0, len(authors) - 1,2):
-
         last_name, first_name = authors[i:i + 2]
         last_name = last_name.replace("By ", "")
         last_name = last_name.replace(" and ", "")

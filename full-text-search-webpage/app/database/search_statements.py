@@ -39,3 +39,19 @@ JOIN BookCategories bc ON bc.book_id = b.book_id
 JOIN Categories c ON c.category_id = bc.category_id
 WHERE {Filter}
 GROUP BY b.book_id"""
+
+    TEMPLATE_AUTHORS_FTS = "authors_fts MATCH '{author}'"
+
+    TEMPLATE_CATEGORIES_FILTER = "bc.category_id IN {categories}"
+    TEMPLATE_CATEGORIES_COUNT = "HAVING COUNT(DISTINCT bc.category_id) = {len_categories}"
+
+    TEMPLATE_FULL_TEST_SEARCH = """
+SELECT GROUP_CONCAT(a.first_name || ' ' || a.last_name, ', ') AS authors, b.price, b.title, b.month, b.year, b.description 
+FROM books_fts b 
+JOIN BookAuthors ba ON b.book_id = ba.book_id
+JOIN authors_fts a ON ba.author_id = a.author_id
+JOIN BookCategories bc ON bc.book_id = b.book_id
+JOIN Categories c ON c.category_id = bc.category_id
+WHERE {Filter}
+GROUP BY b.book_id
+"""

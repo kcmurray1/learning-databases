@@ -79,7 +79,7 @@ class BookDatabase:
         # Return 10 books from database
         res = []
         if self.query:
-            res = self.cursor.execute(self.query[0], self.query[1])
+                res = self.cursor.execute(self.query)
         else:
             res = self.cursor.execute(SqlStatements.RETRIEVE_BOOK_WITH_LIMIT, (self.book_offset_size, self.book_offset))
             self.book_offset += self.book_offset_size
@@ -94,13 +94,39 @@ class BookDatabase:
         return res
     
     def execute_query(self, search_term, categories):
-        if not search_term:
-            categories = categories[1:]
+        # Do nothing if there is nothing to search for
+        if not search_term and not categories:
+            return
         
-        query = SqlStatements.TEMPLATE_FILTER_SEARCH
-        filters = SqlStatements.TEMPLATE_FILTER_CATEGORY_START + SqlStatements.TEMPLATE_FILTER_CATEGORY * (len(categories) - 1)
-        query = query.format(Filter=filters)
-        print(query)
-        self.query = (query, categories)
-        # res = self.cursor.execute(query, categories)
-        # print(res.fetchall())        
+        query = SqlStatements.TEMPLATE_FULL_TEST_SEARCH
+
+        categories = categories[1:]
+        filter = ""
+
+        if search_term:
+            filter += SqlStatements.TEMPLATE_AUTHORS_FTS.format(author=search_term)
+
+        if categories:
+            if filter:
+                filter += " AND "
+            filter += SqlStatements.TEMPLATE_CATEGORIES_FILTER.format(categories=tuple(categories) if len(categories) > 1 else f"({categories[0]})")
+            query += SqlStatements.TEMPLATE_CATEGORIES_COUNT.format(len_categories=len(categories))
+
+    
+        query = query.format(Filter=filter)
+        self.query = query
+        
+
+        
+
+    # def execute_query(self, search_term, categories):
+    #     if not search_term:
+    #         categories = categories[1:]
+        
+    #     query = SqlStatements.TEMPLATE_FILTER_SEARCH
+    #     filters = SqlStatements.TEMPLATE_FILTER_CATEGORY_START + SqlStatements.TEMPLATE_FILTER_CATEGORY * (len(categories) - 1)
+    #     query = query.format(Filter=filters)
+    #     print(query)
+    #     self.query = (query, categories)
+    #     # res = self.cursor.execute(query, categories)
+    #     # print(res.fetchall())        
