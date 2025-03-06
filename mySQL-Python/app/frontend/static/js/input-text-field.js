@@ -5,7 +5,7 @@ class InputTextField
         this.label = label;
 
         this.element = document.createElement("form")
-        this.element.className = "InputTextField"
+        this.element.className = "inputTextField"
         
         this.labelElement = document.createElement("label")
         this.labelElement.textContent = this.label

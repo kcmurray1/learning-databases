@@ -1,15 +1,20 @@
 {% extends "base.html" %}
 
- {% block scripts %}
+{% block scripts %}
   <script type="text/javascript" src="{{ url_for('static', filename='js/input-text-field.js') }}"></script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
- {% endblock%}
+{% endblock%}
+
+{%block styles%}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/login-container.css') }}">
+{% endblock%}
 
 {% block title%}Home{% endblock %}
 
 {% block content %}
-
-<div class="login-container" id="login-container">
-
+<div class="container-below-nav" id="container-below-nav">
+  <div class="login-container" id="login-container">
+  </div>
+</div>
 </div>
 {% endblock %}

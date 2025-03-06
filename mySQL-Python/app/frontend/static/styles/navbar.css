@@ -1,11 +1,11 @@
 .container-fluid{
-    background-color: rgb(29, 82, 128);
+    background-color: rgb(47, 51, 44);
 }
 
 .container-fluid a {
     float: left;
     font-size: 25px;
-    color: black;
+    color: rgb(255, 255, 255);
     padding-left: 40px;
 }
 

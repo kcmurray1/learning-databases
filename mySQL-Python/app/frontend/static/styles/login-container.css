@@ -1,0 +1,11 @@
+.login-container {
+    background-color: rgb(231, 31, 31);
+    border-radius: 10px;
+    width: 80%;
+}
+
+.login-container > form.inputTextField {
+    text-align: center;
+    font-size: 20px;
+    padding: 20px;
+}
